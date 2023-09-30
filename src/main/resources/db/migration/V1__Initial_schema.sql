@@ -16,7 +16,7 @@ CREATE TABLE specialities (
 CREATE TABLE patients (
                           id SERIAL PRIMARY KEY,
                           name VARCHAR(255) NOT NULL,
-                          age INTEGER NOT NULL
+                          age INT NOT NULL
 );
 
 -- Pathologies Table
