@@ -1,3 +1,10 @@
+-- Specialities Table
+CREATE TABLE specialities (
+                              id SERIAL PRIMARY KEY,
+                              name VARCHAR(255) NOT NULL
+);
+
+
 -- Doctors Table
 CREATE TABLE doctors (
                          id SERIAL PRIMARY KEY,
@@ -6,11 +13,6 @@ CREATE TABLE doctors (
                          FOREIGN KEY (speciality_id) REFERENCES specialities(id)
 );
 
--- Specialities Table
-CREATE TABLE specialities (
-                             id SERIAL PRIMARY KEY,
-                             name VARCHAR(255) NOT NULL
-);
 
 -- Patients Table
 CREATE TABLE patients (

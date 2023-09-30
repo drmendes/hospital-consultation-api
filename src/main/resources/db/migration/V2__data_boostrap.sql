@@ -1,5 +1,5 @@
 -- Create Doctor table
-CREATE TABLE doctors
+CREATE TABLE IF NOT EXISTS doctors
 (
     id            SERIAL PRIMARY KEY,
     name          VARCHAR(255) NOT NULL,
@@ -8,14 +8,14 @@ CREATE TABLE doctors
 );
 
 -- Create Specialities Table
-CREATE TABLE specialities
+CREATE TABLE IF NOT EXISTS specialities
 (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
 -- Create Patients table
-CREATE TABLE patients
+CREATE TABLE IF NOT EXISTS patients
 (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -23,14 +23,14 @@ CREATE TABLE patients
 );
 
 -- Create Pathologies table
-CREATE TABLE pathologies
+CREATE TABLE IF NOT EXISTS pathologies
 (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
 -- Create Symptoms table
-CREATE TABLE symptoms
+CREATE TABLE IF NOT EXISTS symptoms
 (
     id           SERIAL PRIMARY KEY,
     description  TEXT NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE symptoms
 );
 
 -- Create Consults table
-CREATE TABLE consults
+CREATE TABLE IF NOT EXISTS consults
 (
     id            SERIAL PRIMARY KEY,
     doctor_id     INTEGER,
@@ -53,13 +53,22 @@ CREATE TABLE consults
 );
 
 -- Insert initial data
+-- Insert Specialities
+INSERT INTO specialities (name)
+VALUES ('Dermatology'),
+       ('Ophthalmology'),
+       ('Radiology'),
+       ('Family Medicine'),
+       ('Pediatrics');
+
+
 -- Insert Doctors
 INSERT INTO doctors (name, speciality_id)
-VALUES ('António', 'Dermatology'),
-       ('Maria', 'Ophthalmology'),
-       ('Carlos', 'Radiology'),
-       ('Gabriela', 'Family Medicine'),
-       ('Paulo', 'Pediatrics');
+VALUES ('António', 1),
+       ('Maria', 2),
+       ('Carlos', 3),
+       ('Gabriela', 4),
+       ('Paulo', 5);
 
 -- Insert Patients
 INSERT INTO patients (name, age)
@@ -99,7 +108,6 @@ VALUES ('Symptom 1 description', 1),
        ('Symptom 15 description', 7);
 
 -- Insert Consults
--- Note: You'll need to extend this for all consults, linking doctors, patients, and pathologies.
 INSERT INTO consults (doctor_id, patient_id, pathology_id)
 VALUES (1, 1, 1),
        (1, 1, 2),
