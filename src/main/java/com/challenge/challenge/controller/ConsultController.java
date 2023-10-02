@@ -1,6 +1,7 @@
 package com.challenge.challenge.controller;
 
 import com.challenge.challenge.model.Consult;
+import com.challenge.challenge.model.ConsultCreationDTO;
 import com.challenge.challenge.model.Patient;
 import com.challenge.challenge.service.ConsultService;
 import com.challenge.challenge.service.PatientService;
@@ -23,9 +24,9 @@ public class ConsultController {
     private ConsultService consultService;
 
     @PostMapping
-    public ResponseEntity<Consult> createConsult(@RequestBody Consult consult) {
-        Consult savedConsult = consultService.saveConsult(consult);
-        return new ResponseEntity<>(savedConsult, HttpStatus.CREATED);
+    public ResponseEntity<Consult> createConsult(@RequestBody ConsultCreationDTO consultDto) {
+        Consult consult = consultService.createConsult(consultDto);
+        return new ResponseEntity<>(consult, HttpStatus.CREATED);
     }
 
     @GetMapping
