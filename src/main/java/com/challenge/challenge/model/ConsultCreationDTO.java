@@ -5,6 +5,8 @@ public class ConsultCreationDTO {
     private String doctor;
     private String patient;
 
+    private String pathology; // Optional
+
     public String getDoctor() {
         return doctor;
     }
@@ -19,6 +21,10 @@ public class ConsultCreationDTO {
 
     public void setPatient(String patient) {
         this.patient = patient;
+    }
+
+    public String getPathology() {
+        return pathology;
     }
 }
 

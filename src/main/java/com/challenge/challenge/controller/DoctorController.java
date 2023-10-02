@@ -28,11 +28,9 @@ public class DoctorController {
 
     @GetMapping
     public ResponseEntity<List<Doctor>> getAllDoctors() {
-
         List<Doctor> doctors = doctorService.getAllDoctors();
-
-        System.out.println("AAAA");  // Log the fetched doctors
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
+
 
 }

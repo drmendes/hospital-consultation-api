@@ -13,5 +13,7 @@ public class Speciality {
     @Column(nullable = false)
     private String name;
 
-    // TODO Getter, Setter
+    public String getName() {
+        return name;
+    }
 }

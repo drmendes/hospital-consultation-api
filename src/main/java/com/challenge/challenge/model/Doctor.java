@@ -26,6 +26,10 @@ public class Doctor {
         return name;
     }
 
+    public Speciality getSpeciality() {
+        return this.speciality;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
