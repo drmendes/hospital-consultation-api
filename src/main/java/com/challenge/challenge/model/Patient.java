@@ -1,6 +1,6 @@
 package com.challenge.challenge.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 @Entity
