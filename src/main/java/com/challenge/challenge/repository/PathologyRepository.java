@@ -1,7 +1,8 @@
 package com.challenge.challenge.repository;
 
 import com.challenge.challenge.model.Consult;
+import com.challenge.challenge.model.Pathology;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PathologyRepository extends JpaRepository<Consult, Long> {
+public interface PathologyRepository extends JpaRepository<Pathology, Long> {
 }
