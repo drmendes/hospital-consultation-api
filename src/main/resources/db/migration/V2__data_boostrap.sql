@@ -108,12 +108,12 @@ VALUES ('Symptom 1 description', 1),
        ('Symptom 15 description', 7);
 
 -- Insert Consults
-INSERT INTO consults (doctor_id, patient_id, pathology_id)
-VALUES (1, 1, 1),
-       (1, 1, 2),
-       (2, 1, 3),
-       (2, 2, 3),
-       (3, 3, 4),
-       (4, 4, 5),
-       (5, 5, 6),
-       (2, 6, 7);
+INSERT INTO consults (speciality_id, doctor_id, patient_id, pathology_id)
+VALUES (1, 1, 1, 1),
+       (1, 1, 1, 2),
+       (2, 2, 1, 3),
+       (2, 2, 2, 3),
+       (3, 3, 3, 4),
+       (4, 4, 4, 5),
+       (5, 5, 5, 6),
+       (2, 2, 6, 7);
