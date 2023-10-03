@@ -52,5 +52,13 @@ public class Consult {
     public void setPathology(Pathology pathology) {
         this.pathology = pathology;
     }
+
+    public Patient getPatient() {
+        return this.patient;
+    }
+
+    public Pathology getPathology() {
+        return this.pathology;
+    }
 }
 

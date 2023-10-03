@@ -2,14 +2,9 @@ package com.challenge.challenge.controller;
 
 import com.challenge.challenge.model.Consult;
 import com.challenge.challenge.model.ConsultCreationDTO;
-import com.challenge.challenge.model.Patient;
+import com.challenge.challenge.model.ConsultResponseDTO;
 import com.challenge.challenge.service.ConsultService;
-import com.challenge.challenge.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,14 +18,22 @@ public class ConsultController {
     @Autowired
     private ConsultService consultService;
 
-    @PostMapping
-    public ResponseEntity<Consult> createConsult(@RequestBody ConsultCreationDTO consultDto) {
-        Consult consult = consultService.createConsult(consultDto);
-        return new ResponseEntity<>(consult, HttpStatus.CREATED);
+    @Autowired
+    public ConsultController(ConsultService consultService) {
+        this.consultService = consultService;
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ConsultResponseDTO createConsult(@RequestBody ConsultCreationDTO consultCreationDTO) {
+        return consultService.createConsult(consultCreationDTO);
+    }
+
 
     @GetMapping
     public ResponseEntity<List<Consult>> getAllConsults() {
         return ResponseEntity.ok(consultService.getAllConsults());
     }
+
 }
+

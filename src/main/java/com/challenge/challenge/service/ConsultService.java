@@ -22,7 +22,7 @@ public class ConsultService {
     @Autowired
     private PathologyRepository pathologyRepository;
 
-    public Consult createConsult(ConsultCreationDTO consultDto) {
+    public ConsultResponseDTO createConsult(ConsultCreationDTO consultDto) {
         // Retrieve the doctor by name
         Doctor doctor = doctorRepository.findByName(consultDto.getDoctor())
                 .orElseThrow(() -> new EntityNotFoundException("Doctor not found"));
@@ -45,14 +45,27 @@ public class ConsultService {
         consult.setSpeciality(doctor.getSpeciality());
         consult.setPathology(pathology);
 
-        // Save and return the consult
-        return consultRepository.save(consult);
+        Consult savedConsult = consultRepository.save(consult);
+
+        return toConsultResponseDTO(savedConsult);
     }
 
+
+    private ConsultResponseDTO toConsultResponseDTO(Consult consult) {
+        ConsultResponseDTO responseDTO = new ConsultResponseDTO();
+        responseDTO.setDoctor(consult.getDoctor().getName());
+        responseDTO.setPatient(consult.getPatient().getName());
+        responseDTO.setSpeciality(consult.getSpeciality().getName());
+        if (consult.getPathology() != null) {
+            responseDTO.setPathology(consult.getPathology().getName());
+        }
+        return responseDTO;
+    }
 
     public List<Consult> getAllConsults() {
         return consultRepository.findAll();
     }
+
 }
 
 

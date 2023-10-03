@@ -17,5 +17,9 @@ public class Patient {
     @Column(nullable = false)
     private Integer age;
 
+    public String getName() {
+        return this.name;
+    }
+
     // Getter, Setter, and other methods...
 }
