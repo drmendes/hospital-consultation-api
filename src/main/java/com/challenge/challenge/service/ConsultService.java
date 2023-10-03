@@ -1,5 +1,8 @@
 package com.challenge.challenge.service;
 
+import com.challenge.challenge.controller.DoctorNotFoundException;
+import com.challenge.challenge.controller.PathologyNotFoundException;
+import com.challenge.challenge.controller.PatientNotFoundException;
 import com.challenge.challenge.model.*;
 import com.challenge.challenge.repository.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,7 +14,7 @@ import java.util.List;
 @Service
 public class ConsultService {
     @Autowired
-    private DoctorRepository doctorRepository;  // Assuming you have this repository
+    private DoctorRepository doctorRepository;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -22,32 +25,27 @@ public class ConsultService {
     @Autowired
     private PathologyRepository pathologyRepository;
 
+
     public ConsultResponseDTO createConsult(ConsultCreationDTO consultDto) {
         // Retrieve the doctor by name
         Doctor doctor = doctorRepository.findByName(consultDto.getDoctor())
-                .orElseThrow(() -> new EntityNotFoundException("Doctor not found"));
+                .orElseThrow(() -> new DoctorNotFoundException("Doctor not found"));
 
         // Retrieve the patient by name
         Patient patient = patientRepository.findByName(consultDto.getPatient())
-                .orElseThrow(() -> new EntityNotFoundException("Patient not found"));
+                .orElseThrow(() -> new PatientNotFoundException("Patient not found"));
 
         // If pathology is provided, retrieve and validate it
         Pathology pathology = null;
         if (consultDto.getPathology() != null) {
             pathology = pathologyRepository.findByName(consultDto.getPathology())
-                    .orElseThrow(() -> new EntityNotFoundException("Pathology not found"));
+                    .orElseThrow(() -> new PathologyNotFoundException("Pathology not found"));
         }
 
         // Create a new consult with the retrieved doctor and patient
-        Consult consult = new Consult();
-        consult.setDoctor(doctor);
-        consult.setPatient(patient);
-        consult.setSpeciality(doctor.getSpeciality());
-        consult.setPathology(pathology);
+        Consult savedConsult = consultRepository.save(new Consult(doctor, doctor.getSpeciality(), patient, pathology));
 
-        Consult savedConsult = consultRepository.save(consult);
-
-        return toConsultResponseDTO(savedConsult);
+        return new ConsultResponseDTO(String.valueOf(savedConsult.getId()), savedConsult.getDoctor().getName(), savedConsult.getPatient().getName(), savedConsult.getPathology() != null ? savedConsult.getPathology().getName() : null);
     }
 
 

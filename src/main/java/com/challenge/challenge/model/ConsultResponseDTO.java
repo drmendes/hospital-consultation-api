@@ -8,6 +8,15 @@ public class ConsultResponseDTO {
     private String speciality;
     private String pathology;
 
+
+    public ConsultResponseDTO(String doctor, String patient, String speciality, String pathology) {
+        this.doctor = doctor;
+        this.patient = patient;
+        this.speciality = speciality;
+        this.pathology = pathology;
+    }
+
+    public ConsultResponseDTO(){}
     public String getDoctor() {
         return doctor;
     }
