@@ -24,4 +24,8 @@ public class Patient {
     public Long getId() {
         return this.id;
     }
+
+    public Integer getAge() {
+        return this.age;
+    }
 }

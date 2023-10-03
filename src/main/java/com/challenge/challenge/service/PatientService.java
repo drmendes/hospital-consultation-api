@@ -26,10 +26,6 @@ public class PatientService {
     @Autowired
     private SymptomRepository symptomRepository;
 
-    public Page<Patient> getAllPatients(Pageable pageable) {
-        return patientRepository.findAll(pageable);
-    }
-
     public List<Consult> getConsultsForPatient(Long patientId) {
         return consultRepository.findByPatientId(patientId);
     }
@@ -41,4 +37,17 @@ public class PatientService {
     public Optional<Patient> findById(Long id) {
         return patientRepository.findById(id);
     }
+
+    public Page<Patient> getAllPatients(String name, Integer age, Pageable pageable) {
+        if (name != null && age != null) {
+            return patientRepository.findByNameContainingAndAge(name, age, pageable);
+        } else if (name != null) {
+            return patientRepository.findByNameContaining(name, pageable);
+        } else if (age != null) {
+            return patientRepository.findByAge(age, pageable);
+        } else {
+            return patientRepository.findAll(pageable);
+        }
+    }
+
 }

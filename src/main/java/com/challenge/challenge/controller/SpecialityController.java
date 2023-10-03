@@ -24,24 +24,7 @@ import java.util.Optional;
 public class SpecialityController {
 
     @Autowired
-    private PatientService patientService;
-
-    @Autowired
     private SpecialityService specialityService;
-
-    @GetMapping
-    public ResponseEntity<Page<Patient>> getAllPatients(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sortBy,
-            @RequestParam(defaultValue = "asc") String direction) {
-
-        Sort sort = direction.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-        Pageable pageable = PageRequest.of(page, size, sort);
-
-        Page<Patient> patients = patientService.getAllPatients(pageable);
-        return new ResponseEntity<>(patients, HttpStatus.OK);
-    }
 
 
     @GetMapping("/top")

@@ -52,6 +52,34 @@ public class PatientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<Map<String, Object>> getAllPatients(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "name") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer age) {
+
+        Sort sort = direction.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<Patient> patients = patientService.getAllPatients(name, age, pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("patients", patients.getContent());
+        response.put("totalPages", patients.getTotalPages());
+        response.put("currentPage", patients.getNumber() + 1); // Page numbers are 0-indexed
+        response.put("totalElements", patients.getTotalElements());
+        response.put("sort", Map.of("type", sortBy, "direction", direction));
+        Map<String, Object> filterMap = new HashMap<>();
+        if (name != null) { filterMap.put("name", name); }
+        if (age != null) { filterMap.put("age", age); }
+        response.put("filter", filterMap);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
     private ConsultDoctorSpecialityListDTO toConsultDoctorSpecialityListDTO(Consult consult) {
         return new ConsultDoctorSpecialityListDTO(consult.getId(), consult.getDoctor().getName(), consult.getDoctor().getSpeciality().getName());
