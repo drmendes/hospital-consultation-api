@@ -16,4 +16,8 @@ public class Pathology {
     public String getName() {
         return this.name;
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }

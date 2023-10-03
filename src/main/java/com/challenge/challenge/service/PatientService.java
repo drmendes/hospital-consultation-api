@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientService {
@@ -37,4 +38,7 @@ public class PatientService {
         return symptomRepository.findByPathologyId(pathologyId);
     }
 
+    public Optional<Patient> findById(Long id) {
+        return patientRepository.findById(id);
+    }
 }

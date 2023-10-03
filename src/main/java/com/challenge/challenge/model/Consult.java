@@ -28,6 +28,7 @@ public class Consult {
     @JoinColumn(name = "pathology_id")
     private Pathology pathology;
 
+    public Long getId() { return this.id; }
 
     public Speciality getSpeciality() {
         return this.speciality;
@@ -60,5 +61,6 @@ public class Consult {
     public Pathology getPathology() {
         return this.pathology;
     }
+
 }
 

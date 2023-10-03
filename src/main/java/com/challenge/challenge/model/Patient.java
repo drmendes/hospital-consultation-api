@@ -21,5 +21,7 @@ public class Patient {
         return this.name;
     }
 
-    // Getter, Setter, and other methods...
+    public Long getId() {
+        return this.id;
+    }
 }

@@ -17,5 +17,8 @@ public class Symptom {
     @JoinColumn(name = "pathology_id")
     private Pathology pathology;
 
-    // TODO Getter, Setter
+    public Long getId() { return this.id; }
+
+    public String getDescription() { return this.description; }
+
 }
