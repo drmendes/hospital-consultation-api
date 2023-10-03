@@ -13,6 +13,15 @@ public class Pathology {
     @Column(nullable = false)
     private String name;
 
+    public Pathology(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Pathology() {
+
+    }
+
     public String getName() {
         return this.name;
     }

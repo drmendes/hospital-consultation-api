@@ -20,8 +20,17 @@ public class Doctor {
     @JoinColumn(name = "speciality_id")
     private Speciality speciality;
 
+    public Doctor(long id, String name, Speciality speciality) {
+        this.id = id;
+        this.name = name;
+        this.speciality = speciality;
+    }
 
-    // TODO Getter, Setter
+    public Doctor() {
+
+    }
+
+
     public String getName() {
         return name;
     }
@@ -33,4 +42,6 @@ public class Doctor {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Long getId() { return this.id; }
 }

@@ -13,6 +13,13 @@ public class Speciality {
     @Column(nullable = false)
     private String name;
 
+    public Speciality(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Speciality() {}
+
     public String getName() {
         return name;
     }

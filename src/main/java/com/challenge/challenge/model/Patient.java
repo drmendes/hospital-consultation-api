@@ -17,6 +17,14 @@ public class Patient {
     @Column(nullable = false)
     private Integer age;
 
+    public Patient(long id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Patient() {}
+
     public String getName() {
         return this.name;
     }
