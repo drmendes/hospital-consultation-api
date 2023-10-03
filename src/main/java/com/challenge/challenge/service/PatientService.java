@@ -1,5 +1,6 @@
 package com.challenge.challenge.service;
 
+import com.challenge.challenge.controller.PatientNotFoundException;
 import com.challenge.challenge.model.Consult;
 import com.challenge.challenge.model.Patient;
 import com.challenge.challenge.model.Symptom;
@@ -27,6 +28,9 @@ public class PatientService {
     private SymptomRepository symptomRepository;
 
     public List<Consult> getConsultsForPatient(Long patientId) {
+        if (!patientRepository.existsById(patientId)) {
+            throw new PatientNotFoundException("Patient with id " + patientId + " not found");
+        }
         return consultRepository.findByPatientId(patientId);
     }
 
@@ -40,14 +44,19 @@ public class PatientService {
 
     public Page<Patient> getAllPatients(String name, Integer age, Pageable pageable) {
         if (name != null && age != null) {
-            return patientRepository.findByNameContainingAndAge(name, age, pageable);
-        } else if (name != null) {
-            return patientRepository.findByNameContaining(name, pageable);
-        } else if (age != null) {
-            return patientRepository.findByAge(age, pageable);
-        } else {
-            return patientRepository.findAll(pageable);
+            return Optional.ofNullable(patientRepository.findByNameContainingAndAge(name, age, pageable))
+                    .orElse(Page.empty());
         }
+        if (name != null) {
+            return Optional.ofNullable(patientRepository.findByNameContaining(name, pageable))
+                    .orElse(Page.empty());
+        }
+        if (age != null) {
+            return Optional.ofNullable(patientRepository.findByAge(age, pageable))
+                    .orElse(Page.empty());
+        }
+        return Optional.of(patientRepository.findAll(pageable))
+                .orElse(Page.empty());
     }
 
 }
