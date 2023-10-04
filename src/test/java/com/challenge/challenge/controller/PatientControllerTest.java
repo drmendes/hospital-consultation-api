@@ -2,6 +2,7 @@ package com.challenge.challenge.controller;
 
 import com.challenge.challenge.model.Patient;
 import com.challenge.challenge.service.PatientService;
+import com.challenge.challenge.service.RecentCommandsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ class PatientControllerTest {
 
     @MockBean
     private PatientService patientService;
+
+    @MockBean
+    private RecentCommandsService recentCommandsService; // Mocking the RecentCommandsService
 
     @BeforeEach
     public void setup() {

@@ -7,6 +7,7 @@ import com.challenge.challenge.model.Symptom;
 import com.challenge.challenge.model.dto.ConsultDoctorSpecialityListDTO;
 import com.challenge.challenge.model.dto.SymptomDescriptionListDTO;
 import com.challenge.challenge.service.PatientService;
+import com.challenge.challenge.service.RecentCommandsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,8 +26,12 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private RecentCommandsService recentCommandsService;
+
     @GetMapping("/{id}/consults-and-symptoms")
     public ResponseEntity<Map<String, Object>> getConsultsAndSymptoms(@PathVariable Long id) {
+        recentCommandsService.addCommand(String.format("GET /api/patients/%d/consults-and-symptoms", id));
         Optional<Patient> optionalPatient = patientService.findById(id);
 
         optionalPatient.ifPresentOrElse(
@@ -66,6 +71,8 @@ public class PatientController {
             @RequestParam(defaultValue = "asc") String direction,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer age) {
+
+        recentCommandsService.addCommand("GET /api/patients/all");
 
         Sort sort = direction.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(page, size, sort);
