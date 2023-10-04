@@ -31,22 +31,16 @@ deploy-minikube: build setup-minikube
 
 	echo "visit http://$$(minikube ip):31000/v3/api-docs"
 
-remove-minikube:
-	# Apply kubernetes manifests
-	kubectl delete -f .chart/manifests/
-	minikube delete
-
-
-
-# Test Application
-test:
-	# Test commands go here, for example:
-	mvn test
-
 # Minikube clean up
 clean-minikube:
 	kubectl delete -f .chart/manifests/
 	minikube stop
 	minikube delete
 
-.PHONY: build setup-minikube deploy-minikube test clean-minikube
+# Test Application
+test:
+	# Test commands go here, for example:
+	mvn test
+
+
+.PHONY: build setup-minikube deploy-minikube test clean-minikube deploy-local clean-local
