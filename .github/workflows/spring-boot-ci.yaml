@@ -1,14 +1,19 @@
-name: Spring Boot CI
+name: Spring Boot CI - build and test
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
+    paths:
+      - 'src/**'
+      - '.github/workflows/spring-boot-ci.yaml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - '.github/workflows/spring-boot-ci.yaml'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -32,5 +37,6 @@ jobs:
       run: mvn clean install
 
     - name: Run Tests
-      run: mvn test
+      run: make test
+
 

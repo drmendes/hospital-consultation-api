@@ -8,7 +8,6 @@ on:
 
 
 jobs:
-
   test:
     name: Test - Units & Integrations
     runs-on: ubuntu-18.04
@@ -59,3 +58,13 @@ jobs:
           context: .
           push: true
           tags: drmendes/challenge-app:${{ needs.determine-version.outputs.release_tag }}
+
+  update-index-html:
+    needs: [build-push]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Update Release Version in index.html
+      run: |
+        RELEASE_VERSION=${{ needs.determine-version.outputs.release_tag }}
+        sed -i "s/v1.0.0/${RELEASE_VERSION#refs/tags/}/g" ./docs/index.html
