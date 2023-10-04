@@ -59,7 +59,7 @@ deploy-gke: build push-gke
 DOCKER_HUB_PATH = drmendes/$(DEPLOYMENT_NAME):latest
 
 push-gke:
-	docker tag $(DEPLOYMENT_NAME):latest $(DOCKER_HUB_PATH	)
+	docker tag $(DEPLOYMENT_NAME):latest $(DOCKER_HUB_PATH)
 	docker push $(DOCKER_HUB_PATH)
 
 # GKE Cleanup
