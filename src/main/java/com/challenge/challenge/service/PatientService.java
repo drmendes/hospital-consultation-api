@@ -45,6 +45,7 @@ public class PatientService {
     public Optional<Patient> findById(Long id) {
         return patientRepository.findById(id);
     }
+
     @Cacheable(cacheNames = "allPatients", key = "#name + #age + #pageable.toString()")
     public Page<Patient> getAllPatients(String name, Integer age, Pageable pageable) {
         if (name != null && age != null) {

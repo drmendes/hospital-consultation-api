@@ -8,8 +8,8 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 public class ChallengeApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(ChallengeApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(ChallengeApplication.class, args);
+    }
 
 }

@@ -7,32 +7,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SpecialityPatientCountDTO {
 
-        @JsonProperty("SpecialtyName")
-        private String specialityName;
+    @JsonProperty("SpecialtyName")
+    private String specialityName;
 
 
-        @JsonProperty("NumberOfPatients")
-        private int numberOfPatients;
+    @JsonProperty("NumberOfPatients")
+    private int numberOfPatients;
 
-        public SpecialityPatientCountDTO(String specialityName, int numberOfPatients) {
-                this.specialityName = specialityName;
-                this.numberOfPatients = numberOfPatients;
-        }
+    public SpecialityPatientCountDTO(String specialityName, int numberOfPatients) {
+        this.specialityName = specialityName;
+        this.numberOfPatients = numberOfPatients;
+    }
 
-        public int getPatientCount() {
-                return numberOfPatients;
-        }
+    public int getPatientCount() {
+        return numberOfPatients;
+    }
 
-        public void setNumberOfPatients(int numberOfPatients) {
-                this.numberOfPatients = numberOfPatients;
-        }
+    public void setNumberOfPatients(int numberOfPatients) {
+        this.numberOfPatients = numberOfPatients;
+    }
 
-        public String getSpecialityName() {
-                return specialityName;
-        }
+    public String getSpecialityName() {
+        return specialityName;
+    }
 
-        public void setSpecialityName(String specialityName) {
-                this.specialityName = specialityName;
-        }
+    public void setSpecialityName(String specialityName) {
+        this.specialityName = specialityName;
+    }
 
 }

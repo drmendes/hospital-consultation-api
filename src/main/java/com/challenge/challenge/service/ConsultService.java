@@ -45,20 +45,12 @@ public class ConsultService {
         // Create a new consult with the retrieved doctor and patient
         Consult savedConsult = consultRepository.save(new Consult(doctor, doctor.getSpeciality(), patient, pathology));
 
-        return new ConsultResponseDTO(String.valueOf(savedConsult.getId()), savedConsult.getDoctor().getName(), savedConsult.getPatient().getName(), savedConsult.getPathology() != null ? savedConsult.getPathology().getName() : null);
+        return new ConsultResponseDTO(
+                String.valueOf(savedConsult.getId()), savedConsult.getDoctor().getName(),
+                savedConsult.getPatient().getName(),
+                savedConsult.getPathology() != null ? savedConsult.getPathology().getName() : null);
     }
 
-
-    private ConsultResponseDTO toConsultResponseDTO(Consult consult) {
-        ConsultResponseDTO responseDTO = new ConsultResponseDTO();
-        responseDTO.setDoctor(consult.getDoctor().getName());
-        responseDTO.setPatient(consult.getPatient().getName());
-        responseDTO.setSpeciality(consult.getSpeciality().getName());
-        if (consult.getPathology() != null) {
-            responseDTO.setPathology(consult.getPathology().getName());
-        }
-        return responseDTO;
-    }
 
     public List<Consult> getAllConsults() {
         return consultRepository.findAll();

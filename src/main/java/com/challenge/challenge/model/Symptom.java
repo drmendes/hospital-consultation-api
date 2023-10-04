@@ -27,8 +27,12 @@ public class Symptom {
 
     }
 
-    public Long getId() { return this.id; }
+    public Long getId() {
+        return this.id;
+    }
 
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
 
 }

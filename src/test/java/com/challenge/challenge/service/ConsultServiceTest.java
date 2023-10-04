@@ -56,7 +56,7 @@ public class ConsultServiceTest {
 
         // Attempt to create a consult and expect an exception
         assertThrows(DoctorNotFoundException.class, () -> {
-            consultService.createConsult(new ConsultCreationDTO("Maria", "Manuel",null));
+            consultService.createConsult(new ConsultCreationDTO("Maria", "Manuel", null));
         });
     }
 
@@ -67,7 +67,7 @@ public class ConsultServiceTest {
         when(patientRepository.findByName("Manuel")).thenReturn(Optional.empty());
 
         assertThrows(PatientNotFoundException.class, () -> {
-            consultService.createConsult(new ConsultCreationDTO("Maria", "Manuel",null));
+            consultService.createConsult(new ConsultCreationDTO("Maria", "Manuel", null));
         });
     }
 
@@ -89,11 +89,5 @@ public class ConsultServiceTest {
         assertNotNull(consult);
         assertNull(consult.getPathology());
     }
-
-    @Test
-    public void testBE() {
-        assertTrue(true);
-    }
-
 
 }

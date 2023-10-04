@@ -3,7 +3,6 @@ package com.challenge.challenge.model;
 import jakarta.persistence.*;
 
 
-
 @Entity
 @Table(name = "consults")
 public class Consult {
@@ -35,7 +34,9 @@ public class Consult {
         this.pathology = pathology;
     }
 
-    public Long getId() { return this.id; }
+    public Long getId() {
+        return this.id;
+    }
 
     public Speciality getSpeciality() {
         return this.speciality;

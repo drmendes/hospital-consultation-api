@@ -23,7 +23,8 @@ public class Patient {
         this.age = age;
     }
 
-    public Patient() {}
+    public Patient() {
+    }
 
     public String getName() {
         return this.name;

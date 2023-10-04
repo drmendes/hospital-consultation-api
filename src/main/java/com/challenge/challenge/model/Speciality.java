@@ -18,7 +18,8 @@ public class Speciality {
         this.name = name;
     }
 
-    public Speciality() {}
+    public Speciality() {
+    }
 
     public String getName() {
         return name;

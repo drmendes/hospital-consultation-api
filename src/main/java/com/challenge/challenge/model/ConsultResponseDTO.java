@@ -16,7 +16,9 @@ public class ConsultResponseDTO {
         this.pathology = pathology;
     }
 
-    public ConsultResponseDTO(){}
+    public ConsultResponseDTO() {
+    }
+
     public String getDoctor() {
         return doctor;
     }
