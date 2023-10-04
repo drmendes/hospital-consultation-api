@@ -13,9 +13,10 @@ public interface ConsultRepository extends JpaRepository<Consult, Long> {
 
     @Query("SELECT new com.challenge.challenge.model.dto.SpecialityPatientCountDTO(" +
             "c.speciality.name, " +
-            "int(COUNT(DISTINCT c.patient.id))) " +
+            "COUNT(DISTINCT c.patient.id)) " +  // Removed the int() cast
             "FROM Consult c " +
             "GROUP BY c.speciality.name " +
             "HAVING COUNT(DISTINCT c.patient.id) > :threshold")
+
     List<SpecialityPatientCountDTO> findSpecialitiesWithPatientCountAboveThreshold(@Param("threshold") int threshold);
 }

@@ -12,14 +12,15 @@ public class SpecialityPatientCountDTO {
 
 
     @JsonProperty("NumberOfPatients")
-    private int numberOfPatients;
+    private long numberOfPatients;
 
-    public SpecialityPatientCountDTO(String specialityName, int numberOfPatients) {
+    public SpecialityPatientCountDTO(String specialityName, long numberOfPatients) {
         this.specialityName = specialityName;
         this.numberOfPatients = numberOfPatients;
     }
 
-    public int getPatientCount() {
+
+    public long getPatientCount() {
         return numberOfPatients;
     }
 
