@@ -1,0 +1,18 @@
+---
+name: Change backend url on github pages
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  change-url:
+    name: Change backend URL
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Replace backend URL
+        run: sed -i 's/const backendURL = ".*";/const backendURL = "'${{ secrets.BACKEND_URL }}'";/g' ./docs/index.html
