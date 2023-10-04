@@ -5,6 +5,7 @@ import com.challenge.challenge.exceptions.PathologyNotFoundException;
 import com.challenge.challenge.exceptions.PatientNotFoundException;
 import com.challenge.challenge.model.*;
 import com.challenge.challenge.model.dto.ConsultCreationDTO;
+import com.challenge.challenge.model.dto.ConsultInfoDTO;
 import com.challenge.challenge.model.dto.ConsultResponseDTO;
 import com.challenge.challenge.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ public class ConsultService {
 
     @Autowired
     private PathologyRepository pathologyRepository;
-
 
     public ConsultResponseDTO createConsult(ConsultCreationDTO consultDto) {
         // Retrieve the doctor by name
@@ -56,6 +56,11 @@ public class ConsultService {
     public List<Consult> getAllConsults() {
         return consultRepository.findAll();
     }
+
+    public List<ConsultInfoDTO> getAllConsultInfo() {
+        return consultRepository.getAllConsultInfo();
+    }
+
 
 }
 

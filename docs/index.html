@@ -1,67 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Application</title>
+    <title>Körber Challenge</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
         }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 0 auto;
-            max-width: 600px;
-        }
-        h1, p {
-            text-align: center;
-        }
-        .details {
-            margin-top: 20px;
-            border-top: 1px solid #eaeaea;
-            padding-top: 10px;
-            font-size: 0.8rem;
+
+        th,
+        td {
+            padding: 15px;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1> Körber Challenge</h1>
-    <p>Latest executed commands.</p>
-    <div id="commands"></div>
+<h1>Welcome to the Körber Challenge</h1>
+<p>Release Version: v1.0.0</p>
+<p>Refreshed on: <span id="refreshDate"></span></p>
 
-    <div class="details">
-        <p>Release Version: <span id="release-version">1.0.0</span></p>
-        <p>Date of Refresh: <span id="refresh-date"></span></p>
-    </div>
-</div>
+<h2>Recent Commands</h2>
+<table id="recentCommandsTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Command</th>
+        <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Recent commands data will be populated here -->
+    </tbody>
+</table>
+
+<h2>Consult Information</h2>
+<table id="consultTable">
+    <thead>
+    <tr>
+        <th>Consult ID</th>
+        <th>Doctor Name</th>
+        <th>Speciality Name</th>
+        <th>Patient Name (Age)</th>
+        <th>Pathology Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Consult data will be populated here -->
+    </tbody>
+</table>
 
 <script>
-    fetch('https://somedomain.com/api/recent-commands')
+    const backendURL = "https://backend-service-url";
+
+    document.getElementById('refreshDate').textContent = new Date().toLocaleString();
+
+    // Fetching consult info
+    fetch(backendURL + '/api/consults/info')
         .then(response => response.json())
         .then(data => {
-            let commandsDiv = document.getElementById('commands');
-            commandsDiv.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            const tableBody = document.querySelector('#consultTable tbody');
+            data.forEach(consult => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = consult.consultId;
+                row.insertCell(1).textContent = consult.doctorName;
+                row.insertCell(2).textContent = consult.specialityName;
+                row.insertCell(3).textContent = `${consult.patientName} (${consult.patientAge})`;
+                row.insertCell(4).textContent = consult.pathologyName;
+            });
+        })
+        .catch(error => {
+            console.error("There was an error fetching the consult data:", error);
         });
 
-    // Set the refresh date
-    let currentDate = new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    });
-    document.getElementById('refresh-date').innerText = currentDate;
+    // Fetching recent commands
+    fetch(backendURL + '/api/recent-commands')
+        .then(response => response.json())
+        .then(commands => {
+            const tableBody = document.querySelector('#recentCommandsTable tbody');
+            commands.forEach(command => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = command;
+            });
+        })
+        .catch(error => {
+            console.error("There was an error fetching the recent commands:", error);
+        });
+
 
 </script>
 
+
 </body>
+
 </html>

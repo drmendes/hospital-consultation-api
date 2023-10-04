@@ -2,6 +2,7 @@ package com.challenge.challenge.controller;
 
 import com.challenge.challenge.model.Consult;
 import com.challenge.challenge.model.dto.ConsultCreationDTO;
+import com.challenge.challenge.model.dto.ConsultInfoDTO;
 import com.challenge.challenge.model.dto.ConsultResponseDTO;
 import com.challenge.challenge.service.ConsultService;
 import com.challenge.challenge.service.RecentCommandsService;
@@ -39,6 +40,12 @@ public class ConsultController {
     public ResponseEntity<List<Consult>> getAllConsults() {
         recentCommandsService.addCommand("GET /api/consults");
         return ResponseEntity.ok(consultService.getAllConsults());
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<List<ConsultInfoDTO>> getAllConsultInfo() {
+        List<ConsultInfoDTO> info = consultService.getAllConsultInfo();
+        return new ResponseEntity<>(info, HttpStatus.OK);
     }
 
 }
