@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/patients")
@@ -27,7 +26,10 @@ public class PatientController {
     public ResponseEntity<Map<String, Object>> getConsultsAndSymptoms(@PathVariable Long id) {
         Optional<Patient> optionalPatient = patientService.findById(id);
 
-        optionalPatient.orElseThrow(() -> new PatientNotFoundException("Patient with ID " + id + " not found"));
+        optionalPatient.ifPresentOrElse(
+                value -> {},
+                () -> { throw new PatientNotFoundException("Patient with ID " + id + " not found"); }
+        );
 
         List<Consult> consults = patientService.getConsultsForPatient(id);
         List<Symptom> symptoms = new ArrayList<>();
@@ -39,11 +41,12 @@ public class PatientController {
 
         List<ConsultDoctorSpecialityListDTO> consultDTOs = consults.stream()
                 .map(this::toConsultDoctorSpecialityListDTO)
-                .collect(Collectors.toList());
+                .toList();
 
         List<SymptomDescriptionListDTO> symptomDTOs = symptoms.stream()
                 .map(this::toSymptomDescriptionListDTO)
-                .collect(Collectors.toList());
+                .toList();
+
 
         Map<String, Object> response = new HashMap<>();
         response.put("Consults", consultDTOs);

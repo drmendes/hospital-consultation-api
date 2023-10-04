@@ -1,6 +1,5 @@
 package com.challenge.challenge.service;
 
-import com.challenge.challenge.model.Consult;
 import com.challenge.challenge.model.Doctor;
 import com.challenge.challenge.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -24,7 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class PatientServiceTest {
+class PatientServiceTest {
 
     @Mock
     private PatientRepository patientRepository;
@@ -41,7 +41,7 @@ public class PatientServiceTest {
     }
 
     @Test
-    public void testGetConsultsForPatient_ValidId() {
+    void testGetConsultsForPatient_ValidId() {
         // Mocking data
         Doctor doctor1 = new Doctor(1L, "Doctor1", new Speciality(1L, "Speciality1"));
         Doctor doctor2 = new Doctor(2L, "Doctor2", new Speciality(2L, "Speciality2"));
@@ -67,7 +67,7 @@ public class PatientServiceTest {
     }
 
     @Test
-    public void testGetConsultsForPatient_InvalidId() {
+    void testGetConsultsForPatient_InvalidId() {
         when(patientRepository.findById(99L)).thenReturn(Optional.empty());
 
         assertThrows(PatientNotFoundException.class, () -> {

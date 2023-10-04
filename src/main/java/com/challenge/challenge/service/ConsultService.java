@@ -5,7 +5,6 @@ import com.challenge.challenge.controller.PathologyNotFoundException;
 import com.challenge.challenge.controller.PatientNotFoundException;
 import com.challenge.challenge.model.*;
 import com.challenge.challenge.repository.*;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

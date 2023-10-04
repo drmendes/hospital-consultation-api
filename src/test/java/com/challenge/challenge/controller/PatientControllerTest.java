@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PatientController.class)
-public class PatientControllerTest {
+class PatientControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,7 +40,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void testGetAllPatients_NoFilters() throws Exception {
+    void testGetAllPatients_NoFilters() throws Exception {
         List<Patient> patientsList = Arrays.asList(new Patient(1L, "Patient1", 30),
                 new Patient(2L, "Patient2", 35));
         when(patientService.getAllPatients(isNull(), isNull(), any(Pageable.class))).thenReturn(new PageImpl<>(patientsList));
@@ -53,7 +53,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void testGetAllPatients_WithNameFilter() throws Exception {
+    void testGetAllPatients_WithNameFilter() throws Exception {
         List<Patient> filteredPatientsList = Arrays.asList(new Patient(1L, "Patient1", 30));
         when(patientService.getAllPatients(eq("Patient1"), isNull(), any(Pageable.class))).thenReturn(new PageImpl<>(filteredPatientsList));
 
@@ -64,7 +64,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void testGetAllPatients_WithAgeFilter() throws Exception {
+    void testGetAllPatients_WithAgeFilter() throws Exception {
         List<Patient> filteredPatientsList = Arrays.asList(new Patient(1L, "Patient1", 30));
         when(patientService.getAllPatients(isNull(), eq(30), any(Pageable.class))).thenReturn(new PageImpl<>(filteredPatientsList));
 
@@ -75,7 +75,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void testGetAllPatients_WithNameAndAgeFilter() throws Exception {
+    void testGetAllPatients_WithNameAndAgeFilter() throws Exception {
         List<Patient> filteredPatientsList = Arrays.asList(new Patient(1L, "Patient1", 30));
         when(patientService.getAllPatients(eq("Patient1"), eq(30), any(Pageable.class))).thenReturn(new PageImpl<>(filteredPatientsList));
 

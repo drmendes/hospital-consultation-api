@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class SpecialityControllerTest {
+class SpecialityControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -43,7 +43,7 @@ public class SpecialityControllerTest {
     }
 
     @Test
-    public void testGetTopSpecialitiesWithoutThreshold() throws Exception {
+    void testGetTopSpecialitiesWithoutThreshold() throws Exception {
         when(specialityService.getSpecialitiesWithPatientCountAboveThreshold(any())).thenReturn(mockSpecialities);
 
         mockMvc.perform(get("/api/specialities/top")
@@ -52,7 +52,7 @@ public class SpecialityControllerTest {
     }
 
     @Test
-    public void testGetTopSpecialitiesWithThreshold() throws Exception {
+    void testGetTopSpecialitiesWithThreshold() throws Exception {
         when(specialityService.getSpecialitiesWithPatientCountAboveThreshold(any())).thenReturn(mockSpecialities);
 
         mockMvc.perform(get("/api/specialities/top")

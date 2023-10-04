@@ -1,6 +1,5 @@
 package com.challenge.challenge.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 
@@ -26,9 +25,7 @@ public class Doctor {
         this.speciality = speciality;
     }
 
-    public Doctor() {
-
-    }
+    public Doctor() {}
 
 
     public String getName() {

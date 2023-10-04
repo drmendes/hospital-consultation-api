@@ -18,9 +18,7 @@ public class Pathology {
         this.name = name;
     }
 
-    public Pathology() {
-
-    }
+    public Pathology() {}
 
     public String getName() {
         return this.name;

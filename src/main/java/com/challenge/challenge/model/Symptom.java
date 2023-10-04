@@ -17,18 +17,20 @@ public class Symptom {
     @JoinColumn(name = "pathology_id")
     private Pathology pathology;
 
+    public Symptom() {}
+
     public Symptom(Long id, String description, Pathology pathology) {
         this.id = id;
         this.description = description;
         this.pathology = pathology;
     }
 
-    public Symptom() {
-
-    }
-
     public Long getId() {
         return this.id;
+    }
+
+    public Pathology getPathology() {
+        return pathology;
     }
 
     public String getDescription() {

@@ -28,7 +28,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class ConsultServiceTest {
+class ConsultServiceTest {
 
     @InjectMocks
     private ConsultService consultService;
@@ -51,7 +51,7 @@ public class ConsultServiceTest {
     }
 
     @Test
-    public void testCreateConsult_DoctorDoesNotExist() {
+    void testCreateConsult_DoctorDoesNotExist() {
         when(doctorRepository.findByName("Maria")).thenReturn(Optional.empty());
 
         // Attempt to create a consult and expect an exception
@@ -61,7 +61,7 @@ public class ConsultServiceTest {
     }
 
     @Test
-    public void testCreateConsult_PatientDoesNotExist() {
+    void testCreateConsult_PatientDoesNotExist() {
         when(doctorRepository.findByName("Maria")).thenReturn(Optional.of(new Doctor(1L, "Maria", new Speciality())));
 
         when(patientRepository.findByName("Manuel")).thenReturn(Optional.empty());
@@ -73,7 +73,7 @@ public class ConsultServiceTest {
 
 
     @Test
-    public void testCreateConsult_NoPathologyPassed() {
+    void testCreateConsult_NoPathologyPassed() {
         Doctor mockDoctor = new Doctor(1L, "Maria", new Speciality(1L, "Ophthalmology"));
         Patient mockPatient = new Patient(1L, "Manuel", 42);
 

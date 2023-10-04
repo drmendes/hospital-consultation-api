@@ -34,6 +34,8 @@ public class Consult {
         this.pathology = pathology;
     }
 
+    public Consult() {}
+
     public Long getId() {
         return this.id;
     }

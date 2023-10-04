@@ -1,6 +1,5 @@
 package com.challenge.challenge.repository;
 
-import com.challenge.challenge.model.Consult;
 import com.challenge.challenge.model.Pathology;
 import org.springframework.data.jpa.repository.JpaRepository;
 

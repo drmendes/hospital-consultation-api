@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class DoctorControllerTest {
+class DoctorControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -28,7 +28,7 @@ public class DoctorControllerTest {
     }
 
     @Test
-    public void testGetAllDoctors() throws Exception {
+    void testGetAllDoctors() throws Exception {
         // Performing the test request and asserting results
         mockMvc.perform(get("/api/doctors"))
                 .andExpect(status().isOk());

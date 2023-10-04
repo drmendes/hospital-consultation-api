@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class SpecialityServiceTest {
+class SpecialityServiceTest {
 
     @InjectMocks
     private SpecialityService specialityService;
@@ -45,7 +45,7 @@ public class SpecialityServiceTest {
     }
 
     @Test
-    public void testGetTopSpecialities_NormalScenario() {
+    void testGetTopSpecialities_NormalScenario() {
         List<SpecialityPatientCountDTO> mockList = Arrays.asList(
                 new SpecialityPatientCountDTO("Speciality1", 5),
                 new SpecialityPatientCountDTO("Speciality2", 4),
@@ -68,7 +68,7 @@ public class SpecialityServiceTest {
 
 
     @Test
-    public void testGetTopSpecialities_NoThresholdProvided() {
+    void testGetTopSpecialities_NoThresholdProvided() {
         List<SpecialityPatientCountDTO> mockList = Arrays.asList(
                 new SpecialityPatientCountDTO("Speciality1", 5),
                 new SpecialityPatientCountDTO("Speciality2", 4)
@@ -85,7 +85,7 @@ public class SpecialityServiceTest {
 
 
     @Test
-    public void testGetTopSpecialities_LessThanLimit() {
+    void testGetTopSpecialities_LessThanLimit() {
         List<SpecialityPatientCountDTO> mockList = Arrays.asList(
                 new SpecialityPatientCountDTO("Speciality1", 1)
         );
@@ -99,7 +99,7 @@ public class SpecialityServiceTest {
     }
 
     @Test
-    public void testGetTopSpecialities_Empty() {
+    void testGetTopSpecialities_Empty() {
         when(consultRepository.findSpecialitiesWithPatientCountAboveThreshold(2)).thenReturn(Collections.emptyList());
 
         List<SpecialityPatientCountDTO> result = specialityService.getSpecialitiesWithPatientCountAboveThreshold(Optional.of(2));
