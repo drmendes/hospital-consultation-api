@@ -6,9 +6,11 @@ import com.challenge.challenge.model.dto.ConsultInfoDTO;
 import com.challenge.challenge.model.dto.ConsultResponseDTO;
 import com.challenge.challenge.service.ConsultService;
 import com.challenge.challenge.service.RecentCommandsService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +33,15 @@ public class ConsultController {
         this.consultService = consultService;
     }
 
-    @ApiOperation(value = "Create a new consult")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successfully created consult"),
-            @ApiResponse(code = 400, message = "Bad request due to validation errors"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create a new consult.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Successfully created consult.",
+                    content = @Content(schema = @Schema(implementation = ConsultResponseDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input data.")
+    })
     public ConsultResponseDTO createConsult(@RequestBody ConsultCreationDTO consultCreationDTO) {
         recentCommandsService.addCommand("POST /api/consults");
         return consultService.createConsult(consultCreationDTO);

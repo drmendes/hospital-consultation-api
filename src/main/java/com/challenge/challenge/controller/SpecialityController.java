@@ -1,11 +1,15 @@
+
 package com.challenge.challenge.controller;
 
 import com.challenge.challenge.model.dto.SpecialityPatientCountDTO;
 import com.challenge.challenge.service.RecentCommandsService;
 import com.challenge.challenge.service.SpecialityService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +31,16 @@ public class SpecialityController {
     @Autowired
     private RecentCommandsService recentCommandsService;
 
-    @ApiOperation(value = "Get top specialties by patient count")
+    @Operation(summary = "Get top specialties by patient count")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully retrieved data"),
-            @ApiResponse(code = 500, message = "Internal server error")
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved data",
+                    content = @Content(schema = @Schema(implementation = SpecialityPatientCountDTO.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping("/top")
-    public ResponseEntity<List<SpecialityPatientCountDTO>> getTopSpecialities(@RequestParam Optional<Integer> threshold) {
+    public ResponseEntity<List<SpecialityPatientCountDTO>> getTopSpecialities(
+            @Parameter(description = "Threshold for minimum patient count to consider a specialty. Optional.", example = "5")
+            @RequestParam Optional<Integer> threshold) {
         recentCommandsService.addCommand("GET /api/specialities/top");
 
         List<SpecialityPatientCountDTO> specialties = specialityService.getSpecialitiesWithPatientCountAboveThreshold(threshold);
