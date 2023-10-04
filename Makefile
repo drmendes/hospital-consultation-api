@@ -1,5 +1,6 @@
+
+
 # Variables
-IMAGE_NAME = challenge:1.0.0
 DEPLOYMENT_NAME = challenge-app
 
 # Build the Docker image
@@ -44,3 +45,33 @@ test:
 
 
 .PHONY: build setup-minikube deploy-minikube test clean-minikube deploy-local clean-local
+
+# GKE Deployment
+GKE_NAMESPACE = challenge-ns
+
+deploy-gke: build push-gke
+	# Apply kubernetes manifests
+	kubectl apply -f .chart/manifests-gke/postgresql-secret.yaml -n $(GKE_NAMESPACE)
+	kubectl apply -f .chart/manifests-gke/postgresql.yaml -n $(GKE_NAMESPACE)
+	kubectl apply -f .chart/manifests-gke/service.yaml -n $(GKE_NAMESPACE)
+	kubectl apply -f .chart/manifests-gke/deployment.yaml -n $(GKE_NAMESPACE)
+
+DOCKER_HUB_PATH = drmendes/$(DEPLOYMENT_NAME):latest
+
+push-gke:
+	docker tag $(DEPLOYMENT_NAME):latest $(DOCKER_HUB_PATH	)
+	docker push $(DOCKER_HUB_PATH)
+
+# GKE Cleanup
+clean-gke:
+	kubectl delete -f .chart/manifests-gke/postgresql-secret.yaml -n $(GKE_NAMESPACE)
+	kubectl delete -f .chart/manifests-gke/postgresql.yaml -n $(GKE_NAMESPACE)
+	kubectl delete -f .chart/manifests-gke/service.yaml -n $(GKE_NAMESPACE)
+	kubectl delete -f .chart/manifests-gke/deployment.yaml -n $(GKE_NAMESPACE)
+
+.PHONY: deploy-gke push-gke clean-gke
+
+# Push image to Docker Hub
+push-dockerhub:
+	docker tag $(DEPLOYMENT_NAME):latest $(DOCKER_HUB_PATH)
+	docker push $(DOCKER_HUB_PATH)

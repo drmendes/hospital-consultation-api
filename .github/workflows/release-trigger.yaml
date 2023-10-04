@@ -1,0 +1,16 @@
+name: Trigger Terraform Update on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch to hospital-infra
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.TPAT }}
+          repository: drmendes/hospital-infra
+          event-type: challenge-app-release
