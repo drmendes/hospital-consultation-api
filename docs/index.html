@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database and API Commands Viewer</title>
+</head>
+<body>
+<h2>Recent API Commands</h2>
+<ul id="recentCommandsList"></ul>
+
+<h2>Database Tables (simplified representation)</h2>
+<!-- Replace this with actual table representations fetched from the API -->
+
+<script>
+    fetch('/api/recent-commands')
+        .then(response => response.json())
+        .then(data => {
+            const commandsList = document.getElementById('recentCommandsList');
+            data.forEach(command => {
+                const listItem = document.createElement('li');
+                listItem.textContent = command;
+                commandsList.appendChild(listItem);
+            });
+        });
+</script>
+</body>
+</html>
