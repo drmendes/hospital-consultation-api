@@ -12,7 +12,7 @@
 <!-- Replace this with actual table representations fetched from the API -->
 
 <script>
-    fetch('/api/recent-commands')
+    fetch('https://somedomain.com/api/recent-commands')
         .then(response => response.json())
         .then(data => {
             const commandsList = document.getElementById('recentCommandsList');
