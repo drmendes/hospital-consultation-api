@@ -2,8 +2,10 @@ package com.challenge.challenge;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
-@SpringBootApplication(scanBasePackages = {"com.challenge.challenge.controller","com.challenge.challenge.repository", "com.challenge.challenge.service" })
+@SpringBootApplication
+@EnableCaching
 public class ChallengeApplication {
 
   public static void main(String[] args) {
@@ -11,4 +13,3 @@ public class ChallengeApplication {
   }
 
 }
-

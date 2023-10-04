@@ -73,8 +73,12 @@ public class PatientController {
         response.put("totalElements", patients.getTotalElements());
         response.put("sort", Map.of("type", sortBy, "direction", direction));
         Map<String, Object> filterMap = new HashMap<>();
-        if (name != null) { filterMap.put("name", name); }
-        if (age != null) { filterMap.put("age", age); }
+        if (name != null) {
+            filterMap.put("name", name);
+        }
+        if (age != null) {
+            filterMap.put("age", age);
+        }
         response.put("filter", filterMap);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
