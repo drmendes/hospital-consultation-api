@@ -1,6 +1,7 @@
 package com.challenge.challenge.controller;
 
 
+import com.challenge.challenge.exceptions.PatientNotFoundException;
 import com.challenge.challenge.model.*;
 import com.challenge.challenge.model.Symptom;
 import com.challenge.challenge.service.PatientService;

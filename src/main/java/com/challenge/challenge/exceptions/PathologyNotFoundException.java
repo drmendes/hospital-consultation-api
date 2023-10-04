@@ -1,11 +1,11 @@
-package com.challenge.challenge.controller;
+package com.challenge.challenge.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class PatientNotFoundException extends RuntimeException {
-    public PatientNotFoundException(String message) {
+public class PathologyNotFoundException extends RuntimeException {
+    public PathologyNotFoundException(String message) {
         super(message);
     }
 }

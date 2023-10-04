@@ -1,11 +1,9 @@
 package com.challenge.challenge.service;
 
-import com.challenge.challenge.controller.DoctorNotFoundException;
-import com.challenge.challenge.controller.PatientNotFoundException;
-import com.challenge.challenge.controller.PathologyNotFoundException;
+import com.challenge.challenge.exceptions.DoctorNotFoundException;
+import com.challenge.challenge.exceptions.PatientNotFoundException;
 import com.challenge.challenge.model.*;
 import com.challenge.challenge.repository.ConsultRepository;
-import com.challenge.challenge.service.ConsultService;
 import com.challenge.challenge.repository.DoctorRepository;
 import com.challenge.challenge.repository.PatientRepository;
 import com.challenge.challenge.repository.PathologyRepository;

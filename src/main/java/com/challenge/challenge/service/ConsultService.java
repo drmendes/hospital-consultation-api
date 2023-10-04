@@ -1,8 +1,8 @@
 package com.challenge.challenge.service;
 
-import com.challenge.challenge.controller.DoctorNotFoundException;
-import com.challenge.challenge.controller.PathologyNotFoundException;
-import com.challenge.challenge.controller.PatientNotFoundException;
+import com.challenge.challenge.exceptions.DoctorNotFoundException;
+import com.challenge.challenge.exceptions.PathologyNotFoundException;
+import com.challenge.challenge.exceptions.PatientNotFoundException;
 import com.challenge.challenge.model.*;
 import com.challenge.challenge.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;

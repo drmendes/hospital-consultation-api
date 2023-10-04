@@ -1,4 +1,4 @@
-package com.challenge.challenge.controller;
+package com.challenge.challenge.exceptions;
 
 
 import jakarta.persistence.EntityNotFoundException;
