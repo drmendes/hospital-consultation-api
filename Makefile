@@ -5,7 +5,6 @@ DEPLOYMENT_NAME = challenge-app
 # Build the Docker image
 build:
 	mvn clean install
-	# docker build -t challenge-app:latest . --no-cache
 	docker build -t $(DEPLOYMENT_NAME):latest . --no-cache
 
 # Deploy local
@@ -22,13 +21,22 @@ setup-minikube:
 	minikube addons enable ingress
 
 # Deploy to Minikube
-deploy-minikube: build
-	# Minikube's built-in Docker daemon.
-	eval $$(minikube docker-env)
-	# Use Minikube's daemon
-	make build
+deploy-minikube: build setup-minikube
+	minikube image load $(DEPLOYMENT_NAME):latest
 	# Apply kubernetes manifests
-	kubectl apply -f .chart/manifests/
+	kubectl apply -f .chart/manifests/postgresql-secret.yaml
+	kubectl apply -f .chart/manifests/postgresql.yaml
+	kubectl apply -f .chart/manifests/service.yaml
+	kubectl apply -f .chart/manifests/deployment.yaml
+
+	echo "visit http://$$(minikube ip):31000/v3/api-docs"
+
+remove-minikube:
+	# Apply kubernetes manifests
+	kubectl delete -f .chart/manifests/
+	minikube delete
+
+
 
 # Test Application
 test:
