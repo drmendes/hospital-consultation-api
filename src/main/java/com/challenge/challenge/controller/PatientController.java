@@ -4,6 +4,8 @@ package com.challenge.challenge.controller;
 import com.challenge.challenge.exceptions.PatientNotFoundException;
 import com.challenge.challenge.model.*;
 import com.challenge.challenge.model.Symptom;
+import com.challenge.challenge.model.dto.ConsultDoctorSpecialityListDTO;
+import com.challenge.challenge.model.dto.SymptomDescriptionListDTO;
 import com.challenge.challenge.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

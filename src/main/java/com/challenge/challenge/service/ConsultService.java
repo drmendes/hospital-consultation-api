@@ -4,6 +4,8 @@ import com.challenge.challenge.exceptions.DoctorNotFoundException;
 import com.challenge.challenge.exceptions.PathologyNotFoundException;
 import com.challenge.challenge.exceptions.PatientNotFoundException;
 import com.challenge.challenge.model.*;
+import com.challenge.challenge.model.dto.ConsultCreationDTO;
+import com.challenge.challenge.model.dto.ConsultResponseDTO;
 import com.challenge.challenge.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

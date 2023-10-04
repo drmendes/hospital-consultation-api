@@ -1,4 +1,4 @@
-package com.challenge.challenge.model;
+package com.challenge.challenge.model.dto;
 
 
 public class ConsultResponseDTO {

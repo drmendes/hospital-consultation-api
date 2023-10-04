@@ -1,8 +1,8 @@
 package com.challenge.challenge.controller;
 
 import com.challenge.challenge.model.Consult;
-import com.challenge.challenge.model.ConsultCreationDTO;
-import com.challenge.challenge.model.ConsultResponseDTO;
+import com.challenge.challenge.model.dto.ConsultCreationDTO;
+import com.challenge.challenge.model.dto.ConsultResponseDTO;
 import com.challenge.challenge.service.ConsultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

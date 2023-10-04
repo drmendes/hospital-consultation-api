@@ -3,6 +3,8 @@ package com.challenge.challenge.service;
 import com.challenge.challenge.exceptions.DoctorNotFoundException;
 import com.challenge.challenge.exceptions.PatientNotFoundException;
 import com.challenge.challenge.model.*;
+import com.challenge.challenge.model.dto.ConsultCreationDTO;
+import com.challenge.challenge.model.dto.ConsultResponseDTO;
 import com.challenge.challenge.repository.ConsultRepository;
 import com.challenge.challenge.repository.DoctorRepository;
 import com.challenge.challenge.repository.PatientRepository;
