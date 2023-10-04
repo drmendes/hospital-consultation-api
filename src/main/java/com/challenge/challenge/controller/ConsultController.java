@@ -6,6 +6,8 @@ import com.challenge.challenge.model.dto.ConsultInfoDTO;
 import com.challenge.challenge.model.dto.ConsultResponseDTO;
 import com.challenge.challenge.service.ConsultService;
 import com.challenge.challenge.service.RecentCommandsService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -55,7 +57,7 @@ public class ConsultController {
     }
 
     @GetMapping("/info")
-    public ResponseEntity<List<ConsultInfoDTO>> getAllConsultInfo() {
+    public ResponseEntity<List<ConsultInfoDTO>> getAllConsultInfo() throws JsonProcessingException {
         List<ConsultInfoDTO> info = consultService.getAllConsultInfo();
         return new ResponseEntity<>(info, HttpStatus.OK);
     }

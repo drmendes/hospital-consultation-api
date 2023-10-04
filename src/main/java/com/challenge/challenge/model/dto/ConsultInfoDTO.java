@@ -1,10 +1,7 @@
 package com.challenge.challenge.model.dto;
 
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ConsultInfoDTO {
+
     private Long consultId;
     private String doctorName;
     private String specialityName;
@@ -21,4 +18,31 @@ public class ConsultInfoDTO {
         this.pathologyName = pathologyName;
     }
 
+    // Add getters for each field
+
+    public Long getConsultId() {
+        return consultId;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public String getSpecialityName() {
+        return specialityName;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public Integer getPatientAge() {
+        return patientAge;
+    }
+
+    public String getPathologyName() {
+        return pathologyName;
+    }
+
+    // If needed, you can also add setters, but for DTOs, it's often not necessary.
 }
