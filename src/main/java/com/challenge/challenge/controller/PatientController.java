@@ -8,6 +8,9 @@ import com.challenge.challenge.model.dto.ConsultDoctorSpecialityListDTO;
 import com.challenge.challenge.model.dto.SymptomDescriptionListDTO;
 import com.challenge.challenge.service.PatientService;
 import com.challenge.challenge.service.RecentCommandsService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +32,13 @@ public class PatientController {
     @Autowired
     private RecentCommandsService recentCommandsService;
 
+
+    @ApiOperation(value = "Get consults and symptoms for a specific patient")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved data"),
+            @ApiResponse(code = 404, message = "Patient not found"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     @GetMapping("/{id}/consults-and-symptoms")
     public ResponseEntity<Map<String, Object>> getConsultsAndSymptoms(@PathVariable Long id) {
         recentCommandsService.addCommand(String.format("GET /api/patients/%d/consults-and-symptoms", id));

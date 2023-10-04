@@ -6,6 +6,9 @@ import com.challenge.challenge.model.dto.ConsultInfoDTO;
 import com.challenge.challenge.model.dto.ConsultResponseDTO;
 import com.challenge.challenge.service.ConsultService;
 import com.challenge.challenge.service.RecentCommandsService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +31,12 @@ public class ConsultController {
         this.consultService = consultService;
     }
 
+    @ApiOperation(value = "Create a new consult")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully created consult"),
+            @ApiResponse(code = 400, message = "Bad request due to validation errors"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ConsultResponseDTO createConsult(@RequestBody ConsultCreationDTO consultCreationDTO) {
