@@ -70,8 +70,3 @@ clean-gke:
 	kubectl delete -f .chart/manifests-gke/deployment.yaml -n $(GKE_NAMESPACE)
 
 .PHONY: deploy-gke push-gke clean-gke
-
-# Push image to Docker Hub
-push-dockerhub:
-	docker tag $(DEPLOYMENT_NAME):latest $(DOCKER_HUB_PATH)
-	docker push $(DOCKER_HUB_PATH)
